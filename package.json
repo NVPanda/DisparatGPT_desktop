@@ -1,0 +1,153 @@
+{
+  "name": "disparatgpt_desktop",
+  "version": "2.0.0",
+  "description": "A simple redirect app from OpenAI ChatGPT for use in desktops. Runs on Mac, FreeBSD, Android, Linux, and Windows.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run compile main && electron-forge start",
+    "package": "npm run compile && electron-forge package",
+    "make": "npm run compile && electron-forge make",
+    "publish": "npm run compile && electron-forge publish",
+    "compile": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nvpanda/disparatgpt_desktop.git"
+  },
+  "keywords": [
+    "Chat",
+    "Disparat",
+    "GPT",
+    "nvpanda",
+    "openai"
+  ],
+  "author": "NVPanda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nvpanda/disparatgpt_desktop/issues"
+  },
+  "homepage": "https://github.com/nvpanda/disparatgpt_desktop#readme",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "out": "dist",
+        "icon": "./assets/systemLogo",  
+        "asar": true,
+        "ignore": [
+          ".gitignore",
+          "README.md",
+          "LICENSE",
+          "tsconfig.json",
+          "src/",
+          "tests/"
+        ]
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "platforms": ["win32"],
+          "config": {
+            "name": "disparatgpt_desktop",
+            "setupIcon": "./assets/systemLogo.ico",
+            "certificateFile": "./certs/windows-certificate.pfx",
+            "certificatePassword": "your-cert-password"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "platforms": ["linux"],
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "platforms": ["linux"],
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": ["darwin", "win32"],
+          "config": {
+            "icon": "./assets/systemLogo.icns"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "platforms": ["darwin"],
+          "config": {
+            "background": "./assets/dmg-background.png",
+            "icon": "./assets/systemLogo.icns",
+            "format": "UDZO"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-appimage",
+          "platforms": ["linux"],
+          "config": {
+            "icon": "./assets/systemLogo.png"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-flatpak",
+          "platforms": ["linux"],
+          "config": {
+            "icon": "./assets/systemLogo.png"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-snap",
+          "platforms": ["linux"],
+          "config": {
+            "icon": "./assets/systemLogo.png"
+          }
+        }
+      ],
+      "plugins": [
+        {
+          "name": "@electron-forge/plugin-auto-unpack-natives",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/plugin-fuses",
+          "config": {}
+        }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "nvpanda",
+              "name": "disparatgpt_desktop"
+            },
+            "draft": true,
+            "prerelease": false
+          }
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-appimage": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-dmg": "^7.4.0",
+    "@electron-forge/maker-flatpak": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-snap": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@types/jest": "^28.1.6",
+    "electron": "^32.0.1",
+    "jest": "^25.0.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.2.1"
+  }
+}
